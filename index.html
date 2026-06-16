@@ -1,0 +1,95 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coffee Dreams - Menú Principal</title>
+<style>
+*{box-sizing:border-box}
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#111;
+    color:white;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+.container{
+    max-width:430px;
+    width:100%;
+    padding:20px;
+    text-align:center;
+}
+.logo{
+    font-size:60px;
+    margin-bottom:10px;
+}
+h1{
+    color:#d7a86e;
+    margin:0 0 10px 0;
+    font-size:32px;
+}
+.subtitle{
+    color:#aaa;
+    margin-bottom:40px;
+    font-size:16px;
+}
+.menu-btn{
+    width:100%;
+    padding:25px 20px;
+    margin-bottom:20px;
+    border:none;
+    border-radius:20px;
+    background:#1c1c1c;
+    color:white;
+    font-size:20px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:all .3s;
+    border:2px solid #2a2a2a;
+}
+.menu-btn:hover{
+    background:#2a2a2a;
+    border-color:#d7a86e;
+    transform:translateY(-3px);
+    box-shadow:0 5px 20px rgba(215,168,110,.3);
+}
+.menu-btn .icono{
+    font-size:40px;
+    display:block;
+    margin-bottom:10px;
+}
+.menu-btn .titulo{
+    color:#d7a86e;
+    font-size:24px;
+    margin-bottom:5px;
+}
+.menu-btn .desc{
+    color:#888;
+    font-size:14px;
+    font-weight:normal;
+}
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="logo">☕</div>
+    <h1>Coffee Dreams</h1>
+    <div class="subtitle">Selecciona el tipo de servicio</div>
+    
+    <button class="menu-btn" onclick="location.href='menu-ventas.html'">
+        <span class="icono">💰</span>
+        <div class="titulo">Menú Ventas</div>
+        <div class="desc">Pedidos con cobro al cliente</div>
+    </button>
+    
+    <button class="menu-btn" onclick="location.href='menu-eventos.html'">
+        <span class="icono">🎉</span>
+        <div class="titulo">Menú Eventos</div>
+        <div class="desc">Eventos sin costo para invitados</div>
+    </button>
+</div>
+</body>
+</html>
