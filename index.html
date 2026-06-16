@@ -1,0 +1,552 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coffee Dreams</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#111;
+    color:white;
+}
+.container{
+    max-width:430px;
+    margin:auto;
+    padding:15px;
+}
+.top-bar{
+    display:flex;
+    justify-content:flex-end;
+    margin-bottom:10px;
+}
+.admin-btn{
+    background:#2a2a2a;
+    color:#d7a86e;
+    border:1px solid #d7a86e;
+    padding:8px 14px;
+    border-radius:10px;
+    font-size:14px;
+    font-weight:bold;
+}
+.admin-btn:hover{
+    background:#d7a86e;
+    color:#111;
+}
+.banner{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+    border-radius:20px;
+    margin-bottom:15px;
+}
+h1{
+    text-align:center;
+    color:#d7a86e;
+    margin:0;
+}
+.subtitle{
+    text-align:center;
+    color:#aaa;
+    margin-bottom:20px;
+}
+.card{
+    background:#1c1c1c;
+    border-radius:20px;
+    padding:18px;
+    margin-bottom:18px;
+    box-shadow:0 0 15px rgba(0,0,0,.35);
+}
+.card-header{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:10px;
+}
+.card-header h2{
+    margin:0;
+    font-size:22px;
+}
+.cart-icon{
+    width:28px;
+    height:28px;
+    fill:#d7a86e;
+}
+.product-card{
+    background:#222;
+    border-radius:18px;
+    padding:15px;
+    margin-bottom:20px;
+}
+.product-img{
+    width:100%;
+    height:180px;
+    object-fit:cover;
+    border-radius:15px;
+    margin-bottom:12px;
+}
+.product-title{
+    font-size:22px;
+    color:#f5c389;
+}
+.description{
+    color:#bdbdbd;
+    font-size:14px;
+    margin-top:8px;
+    line-height:1.5;
+}
+.price{
+    color:#d7a86e;
+    font-weight:bold;
+    margin-top:10px;
+    font-size:20px;
+}
+input,select{
+    width:100%;
+    padding:12px;
+    margin-top:10px;
+    border:none;
+    border-radius:12px;
+    background:#2a2a2a;
+    color:white;
+}
+button{
+    border:none;
+    cursor:pointer;
+}
+.qty-row{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:15px;
+    margin-top:15px;
+}
+.qty-btn{
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    background:#7a5230;
+    color:white;
+    font-size:22px;
+}
+.qty{
+    font-size:22px;
+}
+.add-btn{
+    width:100%;
+    padding:12px;
+    margin-top:12px;
+    border-radius:12px;
+    background:#7a5230;
+    color:white;
+    font-weight:bold;
+}
+.cart-item{
+    background:#252525;
+    padding:12px;
+    border-radius:12px;
+    margin-top:10px;
+}
+.total{
+    text-align:right;
+    font-size:24px;
+    color:#f5c389;
+}
+.send-btn{
+    width:100%;
+    padding:16px;
+    border-radius:15px;
+    background:#d7a86e;
+    color:black;
+    font-weight:bold;
+    font-size:18px;
+}
+.toast{
+    position:fixed;
+    bottom:20px;
+    left:50%;
+    transform:translateX(-50%);
+    background:#d7a86e;
+    color:#111;
+    padding:12px 20px;
+    border-radius:12px;
+    font-weight:bold;
+    box-shadow:0 4px 15px rgba(0,0,0,.4);
+    z-index:9999;
+    opacity:0;
+    transition:opacity .3s ease;
+    pointer-events:none;
+}
+.toast.show{
+    opacity:1;
+}
+
+/* Modal Admin */
+.modal{
+    display:none;
+    position:fixed;
+    z-index:10000;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,.85);
+    overflow:auto;
+}
+.modal-content{
+    background:#1c1c1c;
+    margin:20px auto;
+    padding:20px;
+    border-radius:20px;
+    max-width:500px;
+    width:90%;
+}
+.modal-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:15px;
+}
+.modal-header h2{
+    color:#d7a86e;
+    margin:0;
+}
+.close{
+    color:#aaa;
+    font-size:32px;
+    font-weight:bold;
+    cursor:pointer;
+}
+.close:hover{
+    color:#fff;
+}
+.historial-item{
+    background:#252525;
+    padding:12px;
+    border-radius:12px;
+    margin-bottom:10px;
+    font-size:14px;
+}
+.historial-fecha{
+    color:#d7a86e;
+    font-weight:bold;
+    margin-bottom:5px;
+}
+.historial-total{
+    background:#7a5230;
+    padding:15px;
+    border-radius:12px;
+    text-align:center;
+    font-size:20px;
+    font-weight:bold;
+    margin-top:15px;
+}
+.login-box input{
+    margin-bottom:10px;
+}
+.login-box button{
+    width:100%;
+    padding:12px;
+    border-radius:12px;
+    background:#d7a86e;
+    color:black;
+    font-weight:bold;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="top-bar">
+        <button class="admin-btn" onclick="abrirLogin()">Menú Administrador</button>
+    </div>
+
+    <img src="banner.png" class="banner">
+
+    <h1>☕ Coffee Dreams</h1>
+    <div class="subtitle">Premium Coffee Experience</div>
+
+    <div class="card">
+        <label>Nombre del cliente</label>
+        <input id="nombre" placeholder="Escribe tu nombre">
+    </div>
+
+    <div class="card">
+        <h2>Menú</h2>
+
+        <div class="product-card">
+            <img src="cafe-frio.jpg" class="product-img">
+            <div class="product-title">Café Frío 16oz</div>
+            <div class="description">
+                Vaso de 16oz preparado con espresso, leche y hielo.
+                Incluye jarabe de elección y foam de elección.
+            </div>
+            <div class="price">$60</div>
+
+            <select id="jarabe1">
+                <option>Vainilla</option>
+                <option>Caramel</option>
+                <option>Chocolate Blanco</option>
+            </select>
+
+            <div class="qty-row">
+                <button class="qty-btn" onclick="cambiarCantidad('qty1',-1)">-</button>
+                <span class="qty" id="qty1">1</span>
+                <button class="qty-btn" onclick="cambiarCantidad('qty1',1)">+</button>
+            </div>
+
+            <button class="add-btn" onclick="agregar('Cafe Frio 16oz',60,'jarabe1','qty1')">
+                Agregar
+            </button>
+        </div>
+
+        <div class="product-card">
+            <img src="cafe-caliente.png" class="product-img">
+            <div class="product-title">Café Caliente 14oz</div>
+            <div class="description">
+                Vaso de 14oz preparado con espresso y leche vaporizada.
+                Incluye jarabe de elección.
+            </div>
+            <div class="price">$60</div>
+
+            <select id="jarabe2">
+                <option>Vainilla</option>
+                <option>Caramel</option>
+                <option>Chocolate Blanco</option>
+            </select>
+
+            <div class="qty-row">
+                <button class="qty-btn" onclick="cambiarCantidad('qty2',-1)">-</button>
+                <span class="qty" id="qty2">1</span>
+                <button class="qty-btn" onclick="cambiarCantidad('qty2',1)">+</button>
+            </div>
+
+            <button class="add-btn" onclick="agregar('Cafe Caliente 14oz',60,'jarabe2','qty2')">
+                Agregar
+            </button>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <svg class="cart-icon" viewBox="0 0 24 24">
+                <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
+            </svg>
+            <h2>Carrito</h2>
+        </div>
+        <div id="cart"></div>
+        <div class="total">Total: $<span id="total">0</span></div>
+    </div>
+
+    <button class="send-btn" onclick="enviarPedido()">
+        Enviar Pedido
+    </button>
+
+</div>
+
+<!-- Toast de confirmación -->
+<div id="toast" class="toast">Producto agregado al carrito ✅</div>
+
+<!-- Modal Login Admin -->
+<div id="loginModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Acceso Administrador</h2>
+            <span class="close" onclick="cerrarModal('loginModal')">&times;</span>
+        </div>
+        <div class="login-box">
+            <input type="password" id="passwordAdmin" placeholder="Contraseña">
+            <button onclick="validarLogin()">Entrar</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Historial Admin -->
+<div id="adminModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Historial de Ventas</h2>
+            <span class="close" onclick="cerrarModal('adminModal')">&times;</span>
+        </div>
+        <div id="historialContainer"></div>
+    </div>
+</div>
+
+<script>
+let carrito=[];
+let total=0;
+const ADMIN_PASS = "Lespaul13";
+
+function cambiarCantidad(id,cambio){
+    let el=document.getElementById(id);
+    let valor=parseInt(el.innerText);
+    valor += cambio;
+    if(valor<1) valor=1;
+    el.innerText=valor;
+}
+
+function agregar(nombre,precio,jarabeId,qtyId){
+    let jarabe=document.getElementById(jarabeId).value;
+    let qty=parseInt(document.getElementById(qtyId).innerText);
+    let subtotal=precio*qty;
+
+    carrito.push({
+        nombre,
+        precio,
+        qty,
+        jarabe,
+        subtotal
+    });
+
+    total += subtotal;
+    renderCart();
+    mostrarToast(`${qty}x ${nombre} agregado ✅`);
+    document.getElementById(qtyId).innerText = 1;
+}
+
+function mostrarToast(mensaje){
+    let toast = document.getElementById("toast");
+    toast.innerText = mensaje;
+    toast.classList.add("show");
+    
+    setTimeout(() => {
+        toast.classList.remove("show");
+    }, 2000);
+}
+
+function renderCart(){
+    let cart=document.getElementById("cart");
+    cart.innerHTML="";
+
+    carrito.forEach(item=>{
+        cart.innerHTML += `
+        <div class="cart-item">
+            <b>${item.nombre}</b><br>
+            Jarabe: ${item.jarabe}<br>
+            Cantidad: ${item.qty}<br>
+            Subtotal: $${item.subtotal}
+        </div>`;
+    });
+
+    document.getElementById("total").innerText=total;
+}
+
+function enviarPedido(){
+    let nombre=document.getElementById("nombre").value;
+
+    if(nombre===""){
+        alert("Ingresa tu nombre");
+        return;
+    }
+
+    if(carrito.length===0){
+        alert("Tu carrito está vacío");
+        return;
+    }
+
+    // Guardar en historial
+    guardarVenta(nombre, carrito, total);
+
+    let mensaje=`☕ NUEVO PEDIDO - COFFEE DREAMS %0A`;
+    mensaje += `Cliente: ${nombre}%0A%0A`;
+
+    carrito.forEach((item,i)=>{
+        mensaje += `${i+1}) ${item.nombre}%0A`;
+        mensaje += `Jarabe: ${item.jarabe}%0A`;
+        mensaje += `Cantidad: ${item.qty}%0A`;
+        mensaje += `Subtotal: $${item.subtotal}%0A%0A`;
+    });
+
+    mensaje += `TOTAL: $${total}`;
+
+    const BOT_TOKEN = "8469323224:AAFoUR9G00us_MPh5QFiIui79jbpgxeZkEU";
+    const CHAT_ID = "8290866315";
+
+    fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${mensaje}`)
+    .then(()=>{
+        alert("Pedido enviado");
+        carrito = [];
+        total = 0;
+        renderCart();
+        document.getElementById("nombre").value = "";
+    })
+    .catch(()=>alert("Error enviando pedido"));
+}
+
+// === FUNCIONES ADMIN ===
+
+function abrirLogin(){
+    document.getElementById("loginModal").style.display = "block";
+    document.getElementById("passwordAdmin").value = "";
+}
+
+function cerrarModal(id){
+    document.getElementById(id).style.display = "none";
+}
+
+function validarLogin(){
+    let pass = document.getElementById("passwordAdmin").value;
+    if(pass === ADMIN_PASS){
+        cerrarModal('loginModal');
+        mostrarHistorial();
+    } else {
+        alert("Contraseña incorrecta");
+    }
+}
+
+function guardarVenta(cliente, productos, totalVenta){
+    let historial = JSON.parse(localStorage.getItem('coffeeDreamsVentas') || '[]');
+    let fecha = new Date().toLocaleString('es-MX');
+    
+    historial.push({
+        fecha: fecha,
+        cliente: cliente,
+        productos: productos,
+        total: totalVenta
+    });
+    
+    localStorage.setItem('coffeeDreamsVentas', JSON.stringify(historial));
+}
+
+function mostrarHistorial(){
+    let historial = JSON.parse(localStorage.getItem('coffeeDreamsVentas') || '[]');
+    let container = document.getElementById("historialContainer");
+    
+    if(historial.length === 0){
+        container.innerHTML = "<p style='text-align:center;color:#aaa'>No hay ventas registradas</p>";
+    } else {
+        let html = "";
+        let granTotal = 0;
+        
+        historial.reverse().forEach(venta => {
+            granTotal += venta.total;
+            html += `
+            <div class="historial-item">
+                <div class="historial-fecha">${venta.fecha} - ${venta.cliente}</div>
+            `;
+            venta.productos.forEach(p => {
+                html += `${p.qty}x ${p.nombre} - ${p.jarabe} = $${p.subtotal}<br>`;
+            });
+            html += `<b>Total: $${venta.total}</b></div>`;
+        });
+        
+        html += `<div class="historial-total">TOTAL VENTAS: $${granTotal}</div>`;
+        container.innerHTML = html;
+    }
+    
+    document.getElementById("adminModal").style.display = "block";
+}
+
+// Cerrar modal al dar clic fuera
+window.onclick = function(event) {
+    if (event.target.classList.contains('modal')) {
+        event.target.style.display = "none";
+    }
+}
+</script>
+
+</body>
+</html>
